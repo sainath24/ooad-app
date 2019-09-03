@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "577570427422",
+    "firebase_url": "https://ooad-c09a7.firebaseio.com",
+    "project_id": "ooad-c09a7",
+    "storage_bucket": "ooad-c09a7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:577570427422:android:9e7467a10d1a9443",
+        "android_client_info": {
+          "package_name": "com.example.sai.ooad"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "577570427422-9igrff71dho3u3dggia4r93ejc11j6fv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDTQn3ljTFZTZys5T-P0iinnN6SJNrtb0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "577570427422-9igrff71dho3u3dggia4r93ejc11j6fv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

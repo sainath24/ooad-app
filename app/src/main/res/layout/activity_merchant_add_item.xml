@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MerchantAddItem">
+
+    <LinearLayout
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:layout_margin="15dp"
+            android:id="@+id/add_item_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter item name"
+            android:gravity="center"
+            />
+
+        <EditText
+            android:layout_margin="15dp"
+            android:id="@+id/add_item_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter price of item"
+            android:gravity="center"
+            android:inputType="numberDecimal"
+            />
+
+        <EditText
+            android:id="@+id/add_item_quantity"
+            android:layout_margin="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter available quantity(optional)"
+            android:gravity="center"
+            android:inputType="number"
+            />
+        <CheckBox
+            android:id="@+id/add_item_availability_checkbox"
+            android:layout_margin="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Available"
+            />
+        <Button
+            android:id="@+id/add_item_apply_button"
+            android:layout_margin="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SUBMIT"
+            />
+
+
+    </LinearLayout>
+
+
+
+
+
+
+</RelativeLayout>
