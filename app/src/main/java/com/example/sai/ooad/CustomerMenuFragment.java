@@ -41,7 +41,7 @@ public class CustomerMenuFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(merchantMenuRecyclerViewAdapter);
 
-        Log.i("checkmerchant",CustomerHome.selectedMerchant);
+        //Log.i("checkmerchant",CustomerHome.selectedMerchant);
 
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Menu/" + CustomerHome.selectedMerchant);
         databaseReference.addChildEventListener(new ChildEventListener() {

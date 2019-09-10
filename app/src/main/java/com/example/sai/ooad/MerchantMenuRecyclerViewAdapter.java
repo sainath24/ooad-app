@@ -6,7 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -37,8 +39,9 @@ public class MerchantMenuRecyclerViewAdapter extends RecyclerView.Adapter<Mercha
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DataHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final DataHolder holder, final int position) {
 
+        menuItem = new MenuItem();
         menuItem = menuList.get(position);
         holder.name.setText(menuItem.name);
         holder.price.setText("Rs. " + menuItem.price);
@@ -54,14 +57,16 @@ public class MerchantMenuRecyclerViewAdapter extends RecyclerView.Adapter<Mercha
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Menu/testing123");
-                databaseReference.child(menuItem.name).removeValue(new DatabaseReference.CompletionListener() {
-                    @Override
-                    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                        menuList.remove(position);
-                        MerchantMenuFragment.merchantMenuRecyclerViewAdapter.notifyDataSetChanged();
-                    }
-                });
+                if(!MainActivity.isCustomer) {
+                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Menu/testing123");
+                    databaseReference.child(menuItem.name).removeValue(new DatabaseReference.CompletionListener() {
+                        @Override
+                        public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                            menuList.remove(position);
+                            MerchantMenuFragment.merchantMenuRecyclerViewAdapter.notifyDataSetChanged();
+                        }
+                    });
+                }
                 return true;
             }
         });
@@ -69,14 +74,21 @@ public class MerchantMenuRecyclerViewAdapter extends RecyclerView.Adapter<Mercha
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context,MerchantAddItem.class);
-                intent.putExtra("item_name",menuItem.name);
-                intent.putExtra("item_price",menuItem.price);
-                intent.putExtra("item_quantity",menuItem.quantity);
-                intent.putExtra("item_availability",menuItem.isAvailable);
-                intent.putExtra("item_position",position);
-                intent.putExtra("flag",100);
-                context.startActivity(intent);
+                if(!MainActivity.isCustomer) {
+                    Intent intent = new Intent(context, MerchantAddItem.class);
+                    intent.putExtra("item_name", menuItem.name);
+                    intent.putExtra("item_price", menuItem.price);
+                    intent.putExtra("item_quantity", menuItem.quantity);
+                    intent.putExtra("item_availability", menuItem.isAvailable);
+                    intent.putExtra("item_position", position);
+                    intent.putExtra("flag", 100);
+                    context.startActivity(intent);
+                }
+                else {
+                    CustomerHome.customerOrder.orderList.add(menuList.get(position));
+                    CustomerHome.customerOrder.setTotal(menuList.get(position).price);
+                    Toast.makeText(context, "Item Added to Cart", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

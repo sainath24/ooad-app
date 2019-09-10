@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ActionBar;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,6 +19,8 @@ public class CustomerHome extends AppCompatActivity {
     static FragmentManager fragmentManager;
     static String selectedMerchant;
     static boolean merchantMenu = false;
+    static Orders customerOrder;
+    static String customerId = "testCustomer";
 
 
     public static void loadFragment() {
@@ -36,6 +39,8 @@ public class CustomerHome extends AppCompatActivity {
         setContentView(R.layout.activity_customer_home);
         toolbar = findViewById(R.id.customer_home_toolbar);
         setSupportActionBar(toolbar);
+
+        customerOrder = new Orders();
 
         fragmentManager = getSupportFragmentManager();
 
@@ -59,6 +64,7 @@ public class CustomerHome extends AppCompatActivity {
         switch(item.getItemId()) {
             case R.id.customer_toolbar_cart:
                 //Open cart activity
+                startActivity(new Intent(this,CustomerCart.class));
                 return true;
             case R.id.customer_toolbar_logout:
                 //Logout
