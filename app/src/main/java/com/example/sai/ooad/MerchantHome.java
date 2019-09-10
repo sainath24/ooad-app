@@ -16,6 +16,7 @@ public class MerchantHome extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     FrameLayout fragmentContainer;
     FragmentManager fragmentManager;
+    static String merchantName = "testing123";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,8 @@ public class MerchantHome extends AppCompatActivity {
         bottomNavigationView = (BottomNavigationView)findViewById(R.id.merchant_navigation_view);
         fragmentContainer = findViewById(R.id.merchant_home_fragment);
 
+        fragmentManager.beginTransaction().replace(R.id.merchant_home_fragment,new MerchantPendingOrdersFragment()).commit();
+
 
 
 
@@ -36,10 +39,11 @@ public class MerchantHome extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch(menuItem.getItemId()) {
                     case R.id.merchant_pending_orders:
+                        fragmentManager.beginTransaction().replace(R.id.merchant_home_fragment,new MerchantPendingOrdersFragment()).commit();
                         break;
                     case R.id.merchant_menu:
                         MerchantMenuFragment merchantMenuFragment = new MerchantMenuFragment();
-                        fragmentManager.beginTransaction().add(R.id.merchant_home_fragment,merchantMenuFragment).commit();
+                        fragmentManager.beginTransaction().replace(R.id.merchant_home_fragment,merchantMenuFragment).commit();
                         break;
                     case R.id.mercahnt_past_orders:
                         break;

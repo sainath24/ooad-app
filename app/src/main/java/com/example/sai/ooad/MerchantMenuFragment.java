@@ -37,7 +37,7 @@ public class MerchantMenuFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.merchant_menu_fragment,null);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Menu/testing123");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Menu/"+MerchantHome.merchantName);
 
         addItem = (FloatingActionButton)rootView.findViewById(R.id.merchant_menu_add_item);
         menu = rootView.findViewById(R.id.merchant_menu_recyclerview);

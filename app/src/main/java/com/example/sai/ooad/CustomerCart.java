@@ -43,7 +43,8 @@ public class CustomerCart extends AppCompatActivity {
         checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                databaseReference.child(databaseReference.push().getKey()).setValue(CustomerHome.customerOrder);
+                CustomerHome.customerOrder.orderId = databaseReference.push().getKey();
+                databaseReference.child(CustomerHome.customerOrder.orderId).setValue(CustomerHome.customerOrder);
                 Snackbar.make(checkout,"Order Verified",Snackbar.LENGTH_LONG);
                 CustomerHome.customerOrder.clear();
                 finish();

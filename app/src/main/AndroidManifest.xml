@@ -9,8 +9,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Design.Light.NoActionBar">
-        <activity android:name=".CustomerCart"></activity>
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".OrderInfo"></activity>
+        <activity android:name=".CustomerCart" />
         <activity android:name=".CustomerHome" />
         <activity android:name=".MerchantAddItem" />
         <activity android:name=".MainActivity">

@@ -21,6 +21,7 @@ public class CustomerHome extends AppCompatActivity {
     static boolean merchantMenu = false;
     static Orders customerOrder;
     static String customerId = "testCustomer";
+    static String customerName = "CustomerName";
 
 
     public static void loadFragment() {

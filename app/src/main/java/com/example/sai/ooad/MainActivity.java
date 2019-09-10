@@ -16,7 +16,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
-    static boolean isCustomer = true;
+    static boolean isCustomer = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +51,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }); */
 
-        startActivity(new Intent(this,CustomerHome.class));
+        startActivity(new Intent(this,MerchantHome.class));
     }
 }
