@@ -72,6 +72,7 @@ public class CustomerHome extends AppCompatActivity {
                 return true;
             case R.id.customer_toolbar_past_orders:
                 //Jump to past orders activity
+                startActivity(new Intent(this,CustomerPastOrders.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
