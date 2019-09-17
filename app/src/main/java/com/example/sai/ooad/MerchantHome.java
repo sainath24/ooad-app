@@ -46,6 +46,7 @@ public class MerchantHome extends AppCompatActivity {
                         fragmentManager.beginTransaction().replace(R.id.merchant_home_fragment,merchantMenuFragment).commit();
                         break;
                     case R.id.mercahnt_past_orders:
+                        fragmentManager.beginTransaction().replace(R.id.merchant_home_fragment,new MerchantPastOrdersFragment()).commit();
                         break;
                 }
                 return true;

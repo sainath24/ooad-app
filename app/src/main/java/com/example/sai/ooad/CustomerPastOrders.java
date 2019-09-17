@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -32,22 +33,24 @@ public class CustomerPastOrders extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.customer_past_orders_recycler);
         ordersList = new ArrayList<>();
-        merchantPendingOrderRecyclerAdapter = new MerchantPendingOrderRecyclerAdapter(ordersList, getApplicationContext());
+        merchantPendingOrderRecyclerAdapter = new MerchantPendingOrderRecyclerAdapter(ordersList, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(merchantPendingOrderRecyclerAdapter);
         merchantPendingOrderRecyclerAdapter.notifyDataSetChanged();
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Orders");
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Orders");
         databaseReference.orderByValue().addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                DatabaseReference userOrderDatabase = FirebaseDatabase.getInstance().getReference(dataSnapshot.getKey());
+                Log.i("pastOrdersMerchant",dataSnapshot.getKey());
+                final DatabaseReference userOrderDatabase = databaseReference.child(dataSnapshot.getKey());//FirebaseDatabase.getInstance().getReference(dataSnapshot.getKey());
                 userOrderDatabase.orderByValue().addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                        if(dataSnapshot.getKey().toString().equals(CustomerHome.customerName)) {
-                            DatabaseReference ordersDatabase = FirebaseDatabase.getInstance().getReference(CustomerHome.customerName);
-                            ordersDatabase.orderByValue().addChildEventListener(new ChildEventListener() {
+                        Log.i("pastOrdersCustomerId",dataSnapshot.getKey());
+                        if(dataSnapshot.getKey().toString().equals(CustomerHome.customerId)) {
+                            DatabaseReference ordersDatabase = userOrderDatabase.child(CustomerHome.customerId);//FirebaseDatabase.getInstance().getReference(CustomerHome.customerId);
+                            ordersDatabase.orderByChild("time").addChildEventListener(new ChildEventListener() {
                                 @Override
                                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                                     ordersList.add(dataSnapshot.getValue(Orders.class));

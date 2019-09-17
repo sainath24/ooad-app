@@ -88,10 +88,12 @@ public class MerchantMenuRecyclerViewAdapter extends RecyclerView.Adapter<Mercha
                     if(menuList.get(position).isAvailable) {
                         CustomerHome.customerOrder.orderList.add(menuList.get(position));
                         CustomerHome.customerOrder.setTotal(menuList.get(position).price);
-                        Toast.makeText(context, "Item Added to Cart", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(holder.itemView,"Item Added to Cart",Snackbar.LENGTH_SHORT).show();
+                        //Toast.makeText(context, "Item Added to Cart", Toast.LENGTH_SHORT).show();
                     }
                     else
-                        Toast.makeText(context, "Item Unavailable", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(holder.itemView,"Item Unavailable",Snackbar.LENGTH_SHORT).show();
+                        //Toast.makeText(context, "Item Unavailable", Toast.LENGTH_SHORT).show();
                 }
             }
         });

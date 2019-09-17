@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -40,7 +43,21 @@ public class MerchantPendingOrderRecyclerAdapter extends RecyclerView.Adapter<Me
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                Toast.makeText(context, "Order done!", Toast.LENGTH_SHORT).show();
+                if(!MainActivity.isCustomer) {
+                    if(ordersList.get(position).isCompleted) {
+                        Toast.makeText(context, "Order reverted to pending!", Toast.LENGTH_SHORT).show();
+                        ordersList.get(position).isCompleted = false;
+                    }
+                    else if(!ordersList.get(position).isCompleted) {
+                        Toast.makeText(context, "Order done!", Toast.LENGTH_SHORT).show();
+                        ordersList.get(position).isCompleted = true;
+                    }
+                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Orders/" + MerchantHome.merchantName + "/" + ordersList.get(position).customerId);
+                    databaseReference.child(ordersList.get(position).orderId).setValue(ordersList.get(position));
+                    ordersList.remove(position);
+                    MerchantPastOrdersFragment.merchantPendingOrderRecyclerAdapter.notifyDataSetChanged();
+                    MerchantPendingOrdersFragment.merchantPendingOrderRecyclerAdapter.notifyDataSetChanged();
+                }
                 return true;
             }
         });

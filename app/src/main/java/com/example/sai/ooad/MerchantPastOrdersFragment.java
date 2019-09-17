@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -21,24 +22,22 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MerchantPendingOrdersFragment extends Fragment {
-
+public class MerchantPastOrdersFragment extends Fragment {
     RecyclerView recyclerView;
-    List<Orders> ordersList;
     static MerchantPendingOrderRecyclerAdapter merchantPendingOrderRecyclerAdapter;
-    DatabaseReference databaseReference;
-    DatabaseReference customerOrderDatabase;
+    List<Orders> ordersList;
     Orders orders;
+    DatabaseReference databaseReference,customerOrderDatabase;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.merchant_pending_orders_fragment,null);
 
-        ordersList = new ArrayList<>();
         recyclerView = rootView.findViewById(R.id.mercahnt_pending_orders_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        ordersList = new ArrayList<>();
         merchantPendingOrderRecyclerAdapter = new MerchantPendingOrderRecyclerAdapter(ordersList,getContext());
         recyclerView.setAdapter(merchantPendingOrderRecyclerAdapter);
         merchantPendingOrderRecyclerAdapter.notifyDataSetChanged();
@@ -55,7 +54,7 @@ public class MerchantPendingOrdersFragment extends Fragment {
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                         Log.i("merchantPending",dataSnapshot.getValue(Orders.class).toString());
                         orders = dataSnapshot.getValue(Orders.class);
-                        if(!orders.isCompleted) {
+                        if(orders.isCompleted) {
                             ordersList.add(orders);
                             merchantPendingOrderRecyclerAdapter.notifyDataSetChanged();
                         }
@@ -83,9 +82,6 @@ public class MerchantPendingOrdersFragment extends Fragment {
                     }
                 });
 
-
-
-
             }
 
             @Override
@@ -108,9 +104,6 @@ public class MerchantPendingOrdersFragment extends Fragment {
 
             }
         });
-
-
-
 
         return rootView;
     }
