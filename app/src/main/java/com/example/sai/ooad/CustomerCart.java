@@ -38,7 +38,7 @@ public class CustomerCart extends AppCompatActivity {
 
         total.setText("Total: " + String.valueOf(CustomerHome.customerOrder.total));
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Orders/"+CustomerHome.selectedMerchant+"/"+CustomerHome.customerId);
+        databaseReference = FirebaseDatabase.getInstance().getReference("Orders/"+CustomerHome.selectedMerchant+"/"+CustomerHome.customerName);
 
 
         checkout.setOnClickListener(new View.OnClickListener() {

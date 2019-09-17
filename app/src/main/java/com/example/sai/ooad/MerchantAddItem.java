@@ -47,7 +47,7 @@ public class MerchantAddItem extends AppCompatActivity {
 
         }
 
-        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Menu/testing123");
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Menu/" + MerchantHome.merchantName);
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override

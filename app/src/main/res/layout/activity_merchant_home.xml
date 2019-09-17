@@ -6,9 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".MerchantHome">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/merchant_home_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize" />
+
 
     <FrameLayout
         android:id="@+id/merchant_home_fragment"
+        android:layout_below="@id/merchant_home_toolbar"
         android:layout_above="@id/merchant_navigation_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

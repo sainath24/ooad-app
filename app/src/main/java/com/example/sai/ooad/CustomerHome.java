@@ -12,6 +12,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class CustomerHome extends AppCompatActivity {
 
     Toolbar toolbar;
@@ -69,6 +71,8 @@ public class CustomerHome extends AppCompatActivity {
                 return true;
             case R.id.customer_toolbar_logout:
                 //Logout
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(this,CustomerLogIn.class));
                 return true;
             case R.id.customer_toolbar_past_orders:
                 //Jump to past orders activity
@@ -84,8 +88,13 @@ public class CustomerHome extends AppCompatActivity {
     public void onBackPressed() {
         if(merchantMenu)
             loadMerchantListFragment();
-        else
-            super.onBackPressed();
+        else {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+            //super.onBackPressed();
 
     }
 }
